@@ -12,10 +12,10 @@ from .views import (
     employee_update,
     employee_delete,
     
-    # order_list,
-    # order_create,
-    # order_update,
-    # order_delete,
+    order_list,
+    order_create,
+    order_update,
+    order_delete,
 )
 
 urlpatterns = [
@@ -35,10 +35,10 @@ urlpatterns = [
     path('employee_delete/', employee_delete),
 
 
-    # path('order_create/', order_create),
-    # path('order_list/', order_list),
-    # path('order_update/', order_update),
-    # path('order_delete/', order_delete),
+    path('order_create/', order_create),
+    path('order_list/', order_list),
+    path('order_update/', order_update),
+    path('order_delete/', order_delete),
 
 ]
 

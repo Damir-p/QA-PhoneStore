@@ -36,21 +36,21 @@ class EmployeeForm(forms.ModelForm):
         return employee
     
     
-# class OrderForm(forms.ModelForm):
-#     product = forms.ModelChoiceField(queryset=Product.objects.all())
-#     employee = forms.ModelChoiceField(queryset=Employee.objects.all())
-#     customer = forms.ModelChoiceField(queryset=Customer.objects.all())
-#     date_ordered = forms.DateField(widget=forms.DateInput())
+class OrderForm(forms.ModelForm):
+    product = forms.ModelChoiceField(queryset=Product.objects.all())
+    employee = forms.ModelChoiceField(queryset=Employee.objects.all())
+    customer = forms.ModelChoiceField(queryset=Customer.objects.all())
+    date_ordered = forms.DateField(widget=forms.DateInput())
 
-#     class Meta:
-#         model = Order
-#         fields = ['product', 'employee', 'customer', 'date_ordered']
+    class Meta:
+        model = Order
+        fields = ['product', 'employee', 'customer', 'date_ordered']
 
-#     def save(self, commit=True):
-#         order = super().save(commit=False)
-#         if commit:
-#             order.save()
-#         return order
+    def save(self, commit=True):
+        order = super().save(commit=False)
+        if commit:
+            order.save()
+        return order
     
     
     
