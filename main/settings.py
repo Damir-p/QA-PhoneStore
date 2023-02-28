@@ -39,8 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'markets',
     'dashboard',
-    'rest_framework',
-    'cryspy_forms',
+    'crispy_forms',
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap5'
@@ -60,7 +59,9 @@ ROOT_URLCONF = 'main.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            BASE_DIR / 'dashboard' / 'templates'        
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

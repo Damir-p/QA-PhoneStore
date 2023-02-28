@@ -1,36 +1,28 @@
 from django.db import models
 from markets.models import Product, Location
 
-class Customer(models.Model):
-    first_name = models.CharField(max_length=100)    
-    last_name = models.CharField(max_length=100)    
-    age = models.IntegerField(default=0)
-    gender = models.CharField(max_length=100)    
-    location = models.ForeignKey(Location, on_delete=models.CASCADE)
+GENDER_CHOICES = [
+    ('M', 'Male'),
+    ('F', 'Female'),
+    ('O', 'Other'),
+]
 
-    
-    class Meta:
-        verbose_name = ("Клиент(Customer)")
-        verbose_name_plural = ("Клиенты(Customers)")
+class Customer(models.Model):
+    name = models.CharField(max_length=100)        
+    age = models.IntegerField(default=0)
+    gender = models.CharField(max_length=1, choices=GENDER_CHOICES, default='')
+    location = models.ForeignKey(Location, on_delete=models.CASCADE)    
 
     def __str__(self):
         return self.first_name
 
 
 class Employee(models.Model):
-    first_name = models.CharField(max_length=100)
-    last_name = models.CharField(max_length=100)
+    name = models.CharField(max_length=100)
     age = models.IntegerField()
-    gender = models.CharField(max_length=100)
+    gender = models.CharField(max_length=1, choices=GENDER_CHOICES, default='')
     location = models.ForeignKey(Location, on_delete=models.CASCADE)
-    tel_number = models.IntegerField()
-    position = models.CharField(max_length=100)    
-   
   
-    class Meta:
-        verbose_name = ("Сотрудник / Сотрудница(Employee)")
-        verbose_name_plural = ("Сотрудники / Сотрудницы(Employees)")
-
     def __str__(self):
         return self.first_name
 
@@ -41,10 +33,7 @@ class Order(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
     date_ordered = models.DateTimeField(auto_now_add=True)
     
-    class Meta:
-        verbose_name = ("Заказы(Order)")
-        verbose_name_plural = ("Заказы(Orders)")
-
+  
     def __str__(self):
         return f'{self.product} - {self.customer}'
 

@@ -1,12 +1,3 @@
-Bishkek
-Osh
-Jalal-Abad
-Batken
-Talas
-Ysyk-Kul
-Chuy
-Naryn
-
 
 # Страна,Город,Микрорайон
 # Киргизия,Бишкек,Аламедин

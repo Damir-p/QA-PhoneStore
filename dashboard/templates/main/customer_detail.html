@@ -1,0 +1,12 @@
+{% extends 'main/base.html' %}
+
+<h1>Customer details</h1>
+<p><strong>Name:</strong> {{ object.name }}</p>
+<p><strong>Age:</strong> {{ object.age }}</p>
+<p><strong>Gender:</strong> {{ object.get_gender_display }}</p>
+<p><strong>Location:</strong> {{ object.location }}</p>
+<a href="{% url 'customer_update' pk=object.pk %}">Edit customer</a>
+<form action="{% url 'customer_delete' pk=object.pk %}" method="post">
+  {% csrf_token %}
+  <input type="submit" value="Delete customer">
+</form>

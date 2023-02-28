@@ -8,8 +8,8 @@ class Location(models.Model):
     
     
     class Meta:
-        verbose_name = ("Локация(Location)")
-        verbose_name_plural = ("Локация(Locations)")
+        verbose_name = ("Location")
+        verbose_name_plural = ("Locations")
 
     def __str__(self):
         return self.name
@@ -21,8 +21,8 @@ class Product(models.Model):
     desctiption = models.TextField(blank=True, null=True)
     
     class Meta:
-        verbose_name = ("Товар(Product)")
-        verbose_name_plural = ("Товары(Product)")
+        verbose_name = ("Product")
+        verbose_name_plural = ("Product")
 
     def __str__(self):
         return self.name

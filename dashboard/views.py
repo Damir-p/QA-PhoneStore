@@ -1,89 +1,105 @@
-from django.shortcuts import render, redirect, get_object_or_404
+from django.views.generic import ListView, DetailView, CreateView, DeleteView, UpdateView
+from django.urls import reverse_lazy
 from .models import Customer, Employee, Order
-from .forms import CustomerForm, EmployeeForm, OrderForm
-
-def customer_list(request):
-    customers = Customer.objects.all()
-    return render(request, 'dashboard/customer_list.html', {'customers': customers})
-
-def customer_create(request):
-    form = CustomerForm(request.POST or None)
-    if form.is_valid():
-        form.save()
-        return redirect('customer_list')
-    return render(request, 'dashboard/customer_form.html', {'form': form})
-
-def customer_update(request, pk):
-    customer = get_object_or_404(Customer, pk=pk)
-    form = CustomerForm(request.POST or None, instance=customer)
-    if form.is_valid():
-        form.save()
-        return redirect('customer_list')
-    return render(request, 'dashboard/customer_form.html', {'form': form})
-
-def customer_delete(request, pk):
-    customer = get_object_or_404(Customer, pk=pk)
-    if request.method == 'POST':
-        customer.delete()
-        return redirect('customer_list')
-    return render(request, 'dashboard/customer_confirm_delete.html', {'customer': customer})
 
 
+class CustomerListView(ListView):
+    model = Customer
+    template_name = 'main/customer_list.html'
+    context_object_name = 'customers'
 
 
-def employee_list(request):
-    employees = Employee.objects.all()
-    return render(request, 'dashboard/employee_list.html', {'employees': employees})
-
-def employee_create(request):
-    form = EmployeeForm(request.POST or None)
-    if form.is_valid():
-        form.save()
-        return redirect('employee_list')
-    return render(request, 'dashboard/employee_form.html', {'form': form})
-
-def employee_update(request, pk):
-    employee = get_object_or_404(Employee, pk=pk)
-    form = EmployeeForm(request.POST or None, instance=employee)
-    if form.is_valid():
-        form.save()
-        return redirect('employee_list')
-    return render(request, 'dashboard/employee_form.html', {'form': form})
-
-def employee_delete(request, pk):
-    employee = get_object_or_404(Employee, pk=pk)
-    if request.method == 'POST':
-        employee.delete()
-        return redirect('employee_list')
-    return render(request, 'dashboard/employee_confirm_delete.html', {'employee': employee})
+class CustomerDetailView(DetailView):
+    model = Customer
+    template_name = 'main/customer_detail.html'
+    context_object_name = 'customer'
 
 
+class CustomerCreateView(CreateView):
+    model = Customer
+    template_name = 'main/customer_form.html'
+    fields = ['name', 'age', 'gender', 'location']
+    success_url = reverse_lazy('customer_list')
 
 
-def order_list(request):
-    orders = Order.objects.all()
-    return render(request, 'dashboard/order_list.html', {'orders': orders})
+class CustomerDeleteView(DeleteView):
+    model = Customer
+    template_name = 'main/customer_delete.html'
+    success_url = reverse_lazy('customer_list')
 
-def order_create(request):
-    form = OrderForm(request.POST or None)
-    if form.is_valid():
-        form.save()
-        return redirect('order_list')
-    return render(request, 'dashboard/order_form.html', {'form': form})
 
-def order_update(request, pk):
-    order = get_object_or_404(Order, pk=pk)
-    form = OrderForm(request.POST or None, instance=order)
-    if form.is_valid():
-        form.save()
-        return redirect('order_list')
-    return render(request, 'dashboard/order_form.html', {'form': form})
+class CustomerUpdateView(UpdateView):
+    model = Customer
+    template_name = 'main/customer_form.html'
+    fields = ['name', 'age', 'gender', 'location']
+    success_url = reverse_lazy('customer_list')
 
-def order_delete(request, pk):
-    order = get_object_or_404(Order, pk=pk)
-    if request.method == 'POST':
-        order.delete()
-        return redirect('order_list')
-    return render(request, 'dashboard/order_confirm_delete.html', {'order': order})
+
+class EmployeeListView(ListView):
+    model = Employee
+    template_name = 'main/employee_list.html'
+    context_object_name = 'employees'
+
+
+class EmployeeDetailView(DetailView):
+    model = Employee
+    template_name = 'main/employee_detail.html'
+    context_object_name = 'employee'
+
+
+class EmployeeCreateView(CreateView):
+    model = Employee
+    template_name = 'main/employee_form.html'
+    fields = ['name', 'age', 'gender', 'location']
+    success_url = reverse_lazy('employee_list')
+
+
+class EmployeeDeleteView(DeleteView):
+    model = Employee
+    template_name = 'main/employee_delete.html'
+    success_url = reverse_lazy('employee_list')
+
+
+class EmployeeUpdateView(UpdateView):
+    model = Employee
+    template_name = 'main/employee_form.html'
+    fields = ['name', 'age', 'gender', 'location']
+    success_url = reverse_lazy('employee_list')
+
+
+class OrderListView(ListView):
+    model = Order
+    template_name = 'main/order_list.html'
+    context_object_name = 'orders'
+
+
+class OrderDetailView(DetailView):
+    model = Order
+    template_name = 'main/order_detail.html'
+    context_object_name = 'order'
+
+
+class OrderCreateView(CreateView):
+    model = Order
+    template_name = 'main/order_form.html'
+    fields = ['customer', 'employee', 'product']
+    success_url = reverse_lazy('order_list')
+    
+    def post(self, request, *args, **kwargs):
+        # your code here
+        return super().post(request, *args, **kwargs)
+
+
+class OrderDeleteView(DeleteView):
+    model = Order
+    template_name = 'main/order_delete.html'
+    success_url = reverse_lazy('order_list')
+
+
+class OrderUpdateView(UpdateView):
+    model = Order
+    template_name = 'main/order_form.html'
+    fields = ['customer', 'employee','product']
+    success_url = reverse_lazy('order_list')
 
 
