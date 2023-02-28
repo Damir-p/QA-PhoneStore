@@ -1,24 +1,19 @@
-from django.forms import ModelForm, forms
+from django.forms import ModelForm, forms, GENDER_CHOICES
 from .models import Order, Customer, Employee
 
 
 class CustomerForm(ModelForm):
+    gender = forms.ChoiceField(choices=GENDER_CHOICES, widget=forms.RadioSelect)
     class meta:
         model = Customer
-        fields = '__all__'
-        widgets = {
-            'gender': forms.Select(choices=Employee.GENDER_CHOICES),
-        }
-
-
+        fields = fields = ['name', 'age', 'location', 'gender']
+     
 class EmployeeForm(ModelForm):
+    gender = forms.ChoiceField(choices=GENDER_CHOICES, widget=forms.RadioSelect)    
     class meta:
         model = Employee
-        fields = '__all__'
-        widgets = {
-            'gender': forms.Select(choices=Employee.GENDER_CHOICES),
-        }
-        
+        fields = fields = ['name', 'age', 'location', 'gender']
+ 
 class OrderForm(ModelForm):
     class meta:
         model = Order

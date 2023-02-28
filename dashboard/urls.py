@@ -6,7 +6,7 @@ from .views import OrderListView, OrderCreateView, OrderUpdateView, OrderDeleteV
 
 
 urlpatterns = [
-    path('customer/', CustomerListView.as_view(), name='customer_list'),
+    path('', CustomerListView.as_view(), name='customer_list'),
     path('customer/create/', CustomerCreateView.as_view(), name='customer_create'),
     path('customer/<int:pk>/update/', CustomerUpdateView.as_view(), name='customer_update'),
     path('customer/<int:pk>/delete/', CustomerDeleteView.as_view(), name='customer_delete'),
